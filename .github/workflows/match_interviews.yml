@@ -20,6 +20,11 @@ jobs:
           cd algorithm
           python -m pip install -e .
 
+      - name: Install pymongo
+        run: |
+          cd algorithm
+          python -m pip install pymongo[srv]
+
       - name: Run tests
         run: |
           cd algorithm
