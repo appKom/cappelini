@@ -3,7 +3,7 @@ import { FaTrash } from "react-icons/fa";
 import React from "react";
 import { useRouter } from "next/router";
 
-type ColumnType = {
+export type ColumnType = {
   label: string;
   field: string;
 };
@@ -52,9 +52,8 @@ const Table = ({ rows, columns, onDelete }: TableProps) => {
                 {columns.map((column) => (
                   <td
                     key={row.id + "-" + column.field}
-                    className={`px-4 py-2 text-xs ${
-                      columns.indexOf(column) === 0 ? "font-medium" : ""
-                    } sm:px-6 sm:py-4 sm:text-sm`}
+                    className={`px-4 py-2 text-xs ${columns.indexOf(column) === 0 ? "font-medium" : ""
+                      } sm:px-6 sm:py-4 sm:text-sm`}
                   >
                     {column.field === "delete" && onDelete ? (
                       <div className="flex items-center justify-center">

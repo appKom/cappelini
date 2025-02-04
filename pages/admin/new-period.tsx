@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import Button from "../../components/Button";
 import ApplicationForm from "../../components/form/ApplicationForm";
 import CheckboxInput from "../../components/form/CheckboxInput";
-import DatePickerInput from "../../components/form/DatePickerInput";
+import DateRangeInput from "../../components/form/DateRangeInput";
 import TextAreaInput from "../../components/form/TextAreaInput";
 import TextInput from "../../components/form/TextInput";
 import { DeepPartial, periodType } from "../../lib/types/types";
@@ -154,11 +154,11 @@ const NewPeriod = () => {
           />
         </div>
 
-        <DatePickerInput
+        <DateRangeInput
           label="Søknadsperiode"
           updateDates={updateApplicationPeriodDates}
         />
-        <DatePickerInput
+        <DateRangeInput
           label="Intervjuperiode"
           updateDates={updateInterviewPeriodDates}
         />
@@ -214,7 +214,7 @@ const NewPeriod = () => {
         <div className="w-full max-w-lg p-5 mx-auto mt-5 border border-gray-200 rounded-lg shadow dark:border-gray-700">
           <ApplicationForm
             applicationData={periodData}
-            setApplicationData={() => {}}
+            setApplicationData={() => { }}
             availableCommittees={
               (periodData.committees?.filter(Boolean) as string[]) || []
             }

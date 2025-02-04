@@ -4,6 +4,7 @@ interface Props {
   disabled?: boolean;
   placeholder?: string;
   defaultValue?: string;
+  className?: string;
 }
 
 const TextInput = (props: Props) => {
@@ -12,7 +13,7 @@ const TextInput = (props: Props) => {
   };
 
   return (
-    <div className="w-full max-w-xs mx-auto my-6">
+    <div className={"w-full max-w-xs mx-auto my-6 " + props.className ?? ""}>
       <div className="relative">
         <input
           disabled={props.disabled}

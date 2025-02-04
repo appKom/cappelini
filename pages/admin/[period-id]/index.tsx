@@ -4,8 +4,9 @@ import router from "next/router";
 import { periodType } from "../../../lib/types/types";
 import NotFound from "../../404";
 import ApplicantsOverview from "../../../components/applicantoverview/ApplicantsOverview";
+import RoomOverview from "../../../components/admin/RoomOverview";
 import { Tabs } from "../../../components/Tabs";
-import { CalendarIcon, InboxIcon } from "@heroicons/react/24/solid";
+import { CalendarIcon, InboxIcon, BuildingOffice2Icon } from "@heroicons/react/24/solid";
 import Button from "../../../components/Button";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPeriodById } from "../../../lib/api/periodApi";
@@ -87,26 +88,35 @@ const Admin = () => {
               />
             ),
           },
+          {
+            title: "Romoppsett",
+            icon: <BuildingOffice2Icon className="w-5 h-5" />,
+            content: (
+              <RoomOverview
+                period={period}
+              />
+            )
+          },
           //Super admin :)
           ...(session?.user?.email &&
-          ["fhansteen@gmail.com", "jotto0214@gmail.com"].includes(
-            session.user.email
-          )
+            ["fhansteen@gmail.com", "jotto0214@gmail.com"].includes(
+              session.user.email
+            )
             ? [
-                {
-                  title: "Send ut",
-                  icon: <InboxIcon className="w-5 h-5" />,
-                  content: (
-                    <div className="flex flex-col items-center">
-                      <Button
-                        title={"Send ut intervjutider"}
-                        color={"blue"}
-                        onClick={() => sendOutInterviewTimes({ periodId })}
-                      />
-                    </div>
-                  ),
-                },
-              ]
+              {
+                title: "Send ut",
+                icon: <InboxIcon className="w-5 h-5" />,
+                content: (
+                  <div className="flex flex-col items-center">
+                    <Button
+                      title={"Send ut intervjutider"}
+                      color={"blue"}
+                      onClick={() => sendOutInterviewTimes({ periodId })}
+                    />
+                  </div>
+                ),
+              },
+            ]
             : []),
         ]}
       />
