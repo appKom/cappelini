@@ -3,6 +3,7 @@ import {
   committeeInterviewType,
   periodType,
   preferencesType,
+  RoomBooking,
 } from "../types/types";
 
 export const isApplicantType = (
@@ -151,11 +152,11 @@ export const validateCommittee = (data: any, period: periodType): boolean => {
   );
 };
 
-export const isPeriodType = (data: any): data is periodType => {
-  const isDateString = (str: any): boolean => {
-    return typeof str === "string" && !isNaN(Date.parse(str));
-  };
+const isDateString = (str: any): boolean => {
+  return typeof str === "string" && !isNaN(Date.parse(str));
+};
 
+export const isPeriodType = (data: any): data is periodType => {
   const isValidPeriod = (period: any): boolean => {
     return (
       typeof period === "object" &&
@@ -190,4 +191,22 @@ export const isPeriodType = (data: any): data is periodType => {
     arePeriodsValid(data.applicationPeriod, data.interviewPeriod);
 
   return hasBasicFields;
+};
+
+export const isRoomBookings = (data: any): data is RoomBooking[] => {
+  if (!Array.isArray(data)) return false;
+  return data.every(isRoomBooking);
+};
+
+export const isRoomBooking = (data: any): data is RoomBooking => {
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    typeof data.periodId === "string" &&
+    typeof data.room === "string" &&
+    isDateString(data.startDate) &&
+    isDateString(data.endDate) &&
+    (typeof data.committeeId === "string" ||
+      typeof data.committeeId === "undefined")
+  );
 };
